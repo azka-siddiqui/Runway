@@ -1,0 +1,20 @@
+# Backend (Haskell)
+backend/dist-newstyle/
+backend/.stack-work/
+backend/*.db
+*.hi
+*.o
+
+# Frontend (Node)
+frontend/node_modules/
+frontend/dist/
+frontend/*.local
+
+# Tooling
+.kiro/
+
+# Editor / OS
+.DS_Store
+.vscode/
+.idea/
+*.swp
