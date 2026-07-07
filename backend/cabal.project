@@ -1,0 +1,5 @@
+packages: .
+
+-- Pin index-state so builds are reproducible across machines. Bump this
+-- deliberately when you want newer dependency versions.
+index-state: 2026-06-01T00:00:00Z

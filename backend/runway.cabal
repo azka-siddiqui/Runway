@@ -1,0 +1,76 @@
+cabal-version:      3.0
+name:               runway
+version:            0.1.0.0
+synopsis:           Type-safe cash-flow and runway forecasting engine for startups.
+description:
+  Runway ingests a business's transaction ledger and projects the future:
+  burn rate, runway-to-zero, a confidence band around the cash-depletion date,
+  and interactive scenario modelling. The financial core leans on Haskell's
+  type system so that whole classes of money bugs (currency mixing, precision
+  loss, unbalanced transactions) fail to compile.
+
+license:            MIT
+author:             Azka Siddiqui
+maintainer:         azka-siddiqui@users.noreply.github.com
+build-type:         Simple
+
+common warnings
+  ghc-options: -Wall -Wcompat -Wincomplete-record-updates
+               -Wincomplete-uni-patterns -Wredundant-constraints
+
+library
+  import:           warnings
+  hs-source-dirs:   src
+  default-language: GHC2021
+  exposed-modules:
+      Runway.Money
+      Runway.Currency
+      Runway.Ledger
+      Runway.Transaction
+      Runway.Burn
+      Runway.Forecast
+      Runway.Scenario
+      Runway.Store
+      Runway.Api
+      Runway.Seed
+  build-depends:
+      base            >=4.17 && <5
+    , aeson           >=2.1
+    , containers
+    , scientific
+    , text
+    , time
+    , servant
+    , servant-server
+    , wai
+    , wai-cors
+    , warp
+    , sqlite-simple
+    , mtl
+
+executable runway
+  import:           warnings
+  hs-source-dirs:   app
+  main-is:          Main.hs
+  default-language: GHC2021
+  build-depends:    base, runway, warp, text, time, sqlite-simple, directory
+  ghc-options:      -threaded -rtsopts -with-rtsopts=-N
+
+test-suite runway-test
+  import:           warnings
+  type:             exitcode-stdio-1.0
+  hs-source-dirs:   test
+  main-is:          Spec.hs
+  default-language: GHC2021
+  other-modules:
+      MoneySpec
+      LedgerSpec
+      ForecastSpec
+  build-depends:
+      base
+    , runway
+    , hspec
+    , QuickCheck
+    , scientific
+    , time
+    , containers
