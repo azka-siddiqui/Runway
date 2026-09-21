@@ -1,6 +1,6 @@
 # Runway
 
-**Know your number.** Runway ingests a startup's transaction ledger and projects the
+Runway ingests a startup's transaction ledger and projects the
 future: burn rate, runway-to-zero, a confidence band around the cash-depletion date, and
 interactive what-if scenarios.
 
